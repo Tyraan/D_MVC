@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from django.conf.global_settings import TEMPLATE_DIRS
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -23,12 +24,12 @@ SECRET_KEY = 'n!+65g+20&c!n9rqe#$hx0)l=3gmdd-tf^))0@$l6(f-gm@%(c'
 DEBUG = True
 
 TEMPLATE_DEBUG = True
-
+TEMPLATE_DIRS = (
+               os.path.join(os.path.dirname(__file__), 'templates').replace('\\','/'),  
+                 )
 ALLOWED_HOSTS = []
 
-
 # Application definition
-
 INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
@@ -50,7 +51,6 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'd_mvc.urls'
-
 WSGI_APPLICATION = 'd_mvc.wsgi.application'
 
 
