@@ -7,18 +7,26 @@
 		<th>类别下商品</th>
 		<th>管理</th>
 	</tr>
-	{% if catList %} 
+	{% if catList %}	 
 		{% for cat in catList %}			
 	<form>
 	{% csrf_token %}
 		<tr>
-			<th>{ cat.name }</th>
-			<th>{% if cat.products%}{cat.product}{% else %}无{% endif %}</th>
+			<th>{{ cat.name }}</th>
+			<th>{% if cat.products %}{ cat.products) }{% else %}无{% endif %}</th>
 			<th>
-				<button formaction='' type='submit' formmethod='POST'
-					name='deleteCat' value={cat.id}>删除</button>
+				<button formaction='delCat' type='submit' formmethod='POST'
+					name='catId' value={{ cat.id }}>删除</button>
 			</th>
 		</tr>
 	</form>
 		{% endfor %} 
 	{% endif %}
+	
+	{% if result %}
+	 添加成功
+	{% endif %}
+
+
+	
+	
