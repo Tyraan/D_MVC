@@ -35,15 +35,21 @@ def delCat(request):
             c.delete()                
     return showCat(request)
 
+@csrf_exempt
 def showPro(request,**arg):    
-    
     pros = Products.objects.all()
-    if request.GET。get('orderby'):
-        pros.order_by(request.GET。get('orderby'))
-    context = {'products':pros}
+    cats = cats = Category.objects.all()
+    pform = ProductsForm()
+    if request.POST.get('orderby',False):        
+        pros.order_by(request.POST['orderby'])
+    context = {'products':pros ,
+               'request':showRequest(request),
+               'catList':cats,
+               'pform':pform,
+               }
     return render_to_response('proManage.html',context)
-         
           
+
             
         
 

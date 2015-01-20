@@ -8,3 +8,4 @@ class CategoryForm(forms.Form):
 class ProductsForm(forms.Form):
     class Meta:
         model = Products
+        fields = ('name','price','description','category')

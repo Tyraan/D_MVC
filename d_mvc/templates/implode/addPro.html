@@ -1,0 +1,29 @@
+<form imethod="post" action="addPro">
+<h3>添加商品</h3>
+<hr>
+<table>
+<tr>
+<td>商品名称:</td>
+<td><input type="text" value="" name="productName"></td>
+</tr>
+<tr>
+<td>商品价格:</td>
+<td><input tyep='number' value="" name="productPrice"></td>
+</tr>
+<tr>
+<td>商品描述:</td>
+<td><textarea name="productDescription" rows="5" cols="30"> </textarea></td>
+</tr>
+<tr>
+<td>商品类别：</td>
+<td align='left'>
+{% for cat in catList %}
+{{ cat.name }}<input type='checkbox' name ='category[]' value={{cat.name}} />"
+</td>
+{% endfor%}
+</td>
+</tr>
+</table>
+<input type="submit" value="添加" formmethod="POST"	formaction="index.php?c=product&a=add" />
+</form>
+

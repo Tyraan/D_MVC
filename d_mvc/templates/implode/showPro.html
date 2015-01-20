@@ -1,0 +1,30 @@
+<h1>管理商品</h1>
+<hr>
+<table>
+	<tr>
+		<th>商品名称</th>
+		<th>商品价格</th>
+		<th>商品介绍</th>
+		<th>商品类别</th>
+		<th>删除商品</th>
+	</tr>
+	{% if proList %}	 
+		{% for pro in proList %}
+           <tr><form></th><th>{{pro.name}}</th>
+           {% csrf_token %}
+           <th>{{ pro.price }}</th>
+           <th>{{ product.description }}</th>
+           <th>{{ product.uploadTime}}</th>
+           {% if product.category %}
+               </th><th>{{ product.category }}</th><th>
+           {% else %}
+                </th><th>无</th><th>
+           {% endif %}                
+                <button formaction='delPro' type='submit' formmethod='POST' name = 'deleteProduct' value ={{ product.id }}>删除</button>            
+                </form>
+                </tr>
+            {% endfor%}
+     {% endif %}
+</table>
+</h3>
+		
