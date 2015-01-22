@@ -1,4 +1,4 @@
-<form imethod="post" action="addPro">
+<form method="post" action="addPro">
 <h3>添加商品</h3>
 <hr>
 <table>
@@ -8,7 +8,7 @@
 </tr>
 <tr>
 <td>商品价格:</td>
-<td><input tyep='number' value="" name="productPrice"></td>
+<td><input type='number' value="" name="productPrice"></td>
 </tr>
 <tr>
 <td>商品描述:</td>
@@ -16,14 +16,16 @@
 </tr>
 <tr>
 <td>商品类别：</td>
-<td align='left'>
+<td>
 {% for cat in catList %}
-{{ cat.name }}<input type='checkbox' name ='category[]' value={{cat.name}} />"
-</td>
+{{ cat.name }}
+<input type='checkbox' name ='category' value={{ cat.name }} />
 {% endfor%}
 </td>
 </tr>
 </table>
-<input type="submit" value="添加" formmethod="POST"	formaction="index.php?c=product&a=add" />
+<input type="submit" value="添加"  />
 </form>
+
+
 

@@ -13,7 +13,14 @@
 	{% csrf_token %}
 		<tr>
 			<th>{{ cat.name }}</th>
-			<th>{% if cat.products %}{ cat.products) }{% else %}无{% endif %}</th>
+			<th>
+			{% if cat.products_set.all %}			
+			{% for pro in cat.products_set.all %}
+			{{ pro.name }}
+			{% endfor %}
+			{% else %}
+				无
+			{% endif %}</th>
 			<th>
 				<button formaction='delCat' type='submit' formmethod='POST'
 					name='catId' value={{ cat.id }}>删除</button>
@@ -21,10 +28,10 @@
 		</tr>
 	</form>
 		{% endfor %} 
-	{% endif %}
-	
+	{% endif %}	
 	{% if result %}
-	 添加成功
+		 添加成功
+	 
 	{% endif %}
 
 
