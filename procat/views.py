@@ -7,65 +7,75 @@ from django.views.decorators.csrf import csrf_exempt
 
 def index(request):    
     return render_to_response('index.html')
-@csrf_exempt
+
 def showCat(request,arg={}):
     cats = Category.objects.all()    
+    catform = CategoryForm()
     context = {
                'request':showRequest(request),
                'catList':cats,  
-               }    
+               'catform':catform,
+               }
     if arg:context.update(arg)    
     return render_to_response('catManage.html',context)
 
-@csrf_exempt
 def addCat(request):
     if request.method =='POST':
-        catform = CategoryForm(request.POST)
-        has_saved = False        
-        if catform.is_valid():                       
+        catform = CategoryForm(request.POST,request.FILES)
+        has_saved = False  
+        if catform.is_valid():                                  
             try:           
-                Category(name=request.POST.get('name')).save()
+                c = Category( name= catform.cleaned_data['name'],
+                              img = request.FILES['img'])
+                c.save()
                 has_saved =True                
             except KeyError:pass
     return showCat(request,{'result':has_saved})
-@csrf_exempt
+
+
 def delCat(request):
-    if request.method == 'POST':
-        catform = CategoryForm(request.POST)
-        if catform.is_valid():           
-            c = Category.objects.get(id =request.POST.get('catId'))
-            c.delete()                
+    if request.method == 'POST':        
+        #if catform.is_valid():           
+        c = Category.objects.get(id =request.POST.get('catId')) 
+        c.img.delete(save = True)       
+        c.delete()                        
     return showCat(request)
 
-@csrf_exempt
 def addPro(request):
-    if request.method =='POST':
-        proform = ProductsForm(request.POST)
-        has_saved = False
-        if proform.is_valid():
-            data = proform.cleaned_data
-            p = Products(
-                   name = request.POST.get('productName'),
-                   price = request.POST.get('productPrice'),
-                   description = request.POST.get('productDescription'), 
+    if request.method == 'POST':
+        proform = ProductsForm(request.POST, request.FILES)        
+        if proform.is_valid():print('data is valid') 
+        else :print('data isn \' t valid')
+        data = proform.cleaned_data
+        print (data)
+        p = Products(
+                   name=request.POST.get('productName'),
+                   price=request.POST.get('productPrice'),
+                   description=request.POST.get('productDescription'),
+                   img = request.FILES['img'],
                    )
-            p.save()           
-            catList = request.POST.getlist('category')
-            if catList:
-                for i in catList:
-                     p.category.add(Category.objects.get(name = i))
-                  
-    return showPro(request,{})
+        p.save()     
+        print ('has saved !!')      
+        catList = request.POST.getlist('category')
+        if catList:
+            for i in catList:
+                p.category.add(Category.objects.get(name=i)) 
+                          
+    return showPro(request, {})
 
 
-@csrf_exempt
 def delPro(request):
-    if request.method =='POST':
-        proform = ProductsForm(request)
-        if proform.is_valid():
-            c = Products.objects.get(id =request.POST.get('proId'))
-            c.delete()  
-    return showPro(request,{})     
+    if request.method == 'POST':
+        print('recieve POST ')
+        proform = ProductsForm(request.POST)
+        print ('created form')
+        print('form is valid')
+        p = Products.objects.get(id=request.POST.get('proId'))
+        p.img.delete(save=True)
+        p.delete()  
+    return showPro(request, {}) 
+
+    
 
 @csrf_exempt
 def showPro(request,arg={}):    
@@ -73,9 +83,8 @@ def showPro(request,arg={}):
     cats = Category.objects.all()
     pform = ProductsForm({'name':'somename','price':122,'description':'some description'})
     if request.GET.get('orderby',False):        
-        pros.order_by(request.POST['orderby'])
-        if request.GET.get('order',True):
-            pros.sort()
+            pros.order_by('')
+            
             
     context = {'proList':pros,
                'request':showRequest(request),
@@ -96,8 +105,7 @@ def showRequest(request):
     for k,v in request.GET.items() :
         html.append('%s >>>> %s' % (k,v))        
     for k,v in request.META.items():
-        html.append('%s =====>%s ' % (k,v))
-     
+        html.append('%s =====>%s ' % (k,v))     
 
     return html
 

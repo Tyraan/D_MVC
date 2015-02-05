@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 import procat
+from d_mvc.settings import MEDIA_ROOT
 
 urlpatterns = patterns('',
     # Examples:
@@ -9,6 +10,9 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^procat/',include('procat.urls')),
     url(r'^',include('procat.urls')),
+   
+    url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': MEDIA_ROOT, 'show_indexes': True }),
+
 )
 
 

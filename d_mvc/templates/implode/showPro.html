@@ -2,6 +2,7 @@
 <hr>
 <table>
 	<tr>
+		<th>图片</th>
 		<th>商品名称</th>
 		<th>商品价格</th>
 		<th>商品介绍</th>
@@ -13,9 +14,14 @@
 		{% for pro in proList %}
            <tr>
            <form>
-          {% csrf_token %}
-           </th><th>{{pro.name}}</th>
-           {% csrf_token %}
+           	<th>
+           	{% if pro.img %}
+           	<img alt="" hight = 50 width =50 src={{ pro.img.url }} /> 
+			{%else%}<div hight = 75 width = 75><p>无图片</p></div>
+			{% endif %}			
+			</th>
+           <th>{{pro.name}}</th>
+
            <th>{{ pro.price }}</th>
            <th>{{ pro.description }}</th>
            <th>{{ pro.uploadTime|date:"Y-m-d H:i:s"}}</th>

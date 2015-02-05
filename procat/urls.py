@@ -10,4 +10,4 @@ urlpatterns = patterns('',
     url(r'^showPro',    views.showPro,name='showPro'),
     url(r'^addPro',     views.addPro, name = 'addPro'),
     url(r'delPro',      views.delPro, name = 'delPro'),
-                      )
+  )

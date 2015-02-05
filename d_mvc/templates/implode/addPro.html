@@ -1,4 +1,4 @@
-<form method="post" action="addPro">
+<form method="post" enctype="multipart/form-data" action="addPro">
 <h3>添加商品</h3>
 <hr>
 <table>
@@ -13,6 +13,9 @@
 <tr>
 <td>商品描述:</td>
 <td><textarea name="productDescription" rows="5" cols="30"> </textarea></td>
+</tr>
+<tr><td>商品图片</td>
+	<td><input type ='file'name='img' /></td>
 </tr>
 <tr>
 <td>商品类别：</td>
