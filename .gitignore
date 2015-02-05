@@ -45,5 +45,9 @@ Temporary Items
 #==============================
 #  python compile file
 #==============================
-
-.pyc
+*.py[cod]
+*.so
+*.egg
+*.egg-info
+dist
+build
