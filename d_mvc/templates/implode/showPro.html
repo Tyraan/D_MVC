@@ -1,0 +1,48 @@
+<h1>管理商品</h1>
+<hr>
+<table>
+	<tr>
+		<th>图片</th>
+		<th>商品名称</th>
+		<th>商品价格</th>
+		<th>商品介绍</th>
+		<th>上架时间</th>
+		<th>商品类别</th>
+		<th>删除商品</th>
+	</tr>
+	{% if proList %}	 
+		{% for pro in proList %}
+           <tr>
+           <form>
+           	<th>
+           	{% if pro.img %}
+           	<img alt="" hight = 50 width =50 src={{ pro.img.url }} /> 
+			{%else%}<div hight = 75 width = 75><p>无图片</p></div>
+			{% endif %}			
+			</th>
+           <th>{{pro.name}}</th>
+
+           <th>{{ pro.price }}</th>
+           <th>{{ pro.description }}</th>
+           <th>{{ pro.uploadTime|date:"Y-m-d H:i:s"}}</th>
+           {% if pro.category.all %}
+           <th>
+           {% for cat in pro.category.all %}               
+           {{ cat.name }}
+           {% endfor %}
+           </th>
+           {% else %}
+            <th>无</th>                
+           {% endif %} 
+           
+			<th> <button formaction='delPro' type='submit' formmethod='POST' name = 'proId' value ={{ pro.id }}>删除</button></th>          
+                </form>
+                
+           </tr>
+            {% endfor%}
+     {% endif %}
+</table>
+
+
+
+		

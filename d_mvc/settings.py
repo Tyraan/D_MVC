@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from django.conf.global_settings import TEMPLATE_DIRS
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -23,12 +24,12 @@ SECRET_KEY = 'n!+65g+20&c!n9rqe#$hx0)l=3gmdd-tf^))0@$l6(f-gm@%(c'
 DEBUG = True
 
 TEMPLATE_DEBUG = True
-
+TEMPLATE_DIRS = (
+               os.path.join(os.path.dirname(__file__), 'templates').replace('\\','/'),  
+                 )
 ALLOWED_HOSTS = []
 
-
 # Application definition
-
 INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
@@ -37,12 +38,13 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'procat',
+
 )
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -50,7 +52,6 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'd_mvc.urls'
-
 WSGI_APPLICATION = 'd_mvc.wsgi.application'
 
 
@@ -79,13 +80,9 @@ DATABASE_PORT = ''
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
 LANGUAGE_CODE = 'zh-us'
-
-TIME_ZONE = 'UTC'
-
+TIME_ZONE = 'CCT'
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 
@@ -93,3 +90,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_PATH = os.path.join(BASE_DIR,'static')
+STATICFILES_DIRS = (
+    STATIC_PATH,
+)
+MEDIA_ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)),'media').replace('\\','/')+'/'
+MEDIA_URL = "/media/"
+
