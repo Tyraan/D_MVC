@@ -10,7 +10,12 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import sys
+
+
 from django.conf.global_settings import TEMPLATE_DIRS
+
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -80,10 +85,11 @@ DATABASE_PORT = ''
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
 LANGUAGE_CODE = 'zh-us'
-TIME_ZONE = 'CCT'
+TIME_ZONE = 'Asia/Shanghai'
 USE_I18N = True
 USE_L10N = True
-USE_TZ = True
+USE_TZ = False
+
 
 
 # Static files (CSS, JavaScript, Images)

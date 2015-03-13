@@ -1,8 +1,9 @@
 from django import forms
 from django.forms import ModelForm
-from procat.models import Category,Products
 
-        
+from procat.models import Category, Products
+
+
 class CategoryForm(ModelForm): 
     class Meta:
         model = Category    

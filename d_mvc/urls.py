@@ -1,7 +1,9 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-import procat
+
 from d_mvc.settings import MEDIA_ROOT
+import procat
+
 
 urlpatterns = patterns('',
     # Examples:

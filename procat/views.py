@@ -1,9 +1,11 @@
-from django.shortcuts import render,render_to_response
 from django.core.context_processors import request
 from django.http import HttpResponse
-from procat.forms import CategoryForm,ProductsForm
-from procat.models import Category,Products
+from django.shortcuts import render, render_to_response
 from django.views.decorators.csrf import csrf_exempt
+
+from procat.forms import CategoryForm, ProductsForm
+from procat.models import Category, Products
+
 
 def index(request):    
     return render_to_response('index.html')

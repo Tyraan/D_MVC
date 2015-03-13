@@ -1,7 +1,6 @@
 from django.db import models
 
 
-
 class Category(models.Model):
     name = models.CharField(max_length = 128)
     img = models.ImageField(upload_to = 'cat',null = True,blank = True)
