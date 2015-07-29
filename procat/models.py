@@ -20,5 +20,5 @@ class Products(models.Model):
     
 
 
-# 吧里好多纯洁的小娃娃。
+
 

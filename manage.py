@@ -1,6 +1,5 @@
-#!/usr/bin/env python
-import os
 
+import os,sys
 
 
 if __name__ == "__main__":
